@@ -11,7 +11,7 @@ export default function Ticker() {
     ;(async () => {
       try {
         const res = await fetch(
-          `${apiUrl}/api/get-games/?key=${apiKey}&match_id=${matchId}`,
+          `${apiUrl}api/get-games/?key=${apiKey}&match_id=${matchId}`,
         )
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         setGame(JSON.stringify(await res.json(), null, 2))
@@ -28,7 +28,7 @@ export default function Ticker() {
 
   return (
     <div className="bg-gray-100 p-4">
-      <pre className="mt-4 text-sm text-gray-600">
+      <pre className="mt-4 text-gray-600 text-sm">
         <code>{game}</code>
       </pre>
     </div>

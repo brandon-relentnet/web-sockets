@@ -1,7 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { ConnectionState } from '@/components/ConnectionState'
 import { MyForm } from '@/components/MyForm'
-import Ticker from '@/components/Ticker'
+//import Ticker from '@/components/Ticker'
+import TickerLive from '@/components/TickerLive'
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -12,7 +13,8 @@ function App() {
     <div className="App">
       <ConnectionState />
       <MyForm />
-      <Ticker />
+      {/* <Ticker /> */}
+      <TickerLive />
     </div>
   )
 }
