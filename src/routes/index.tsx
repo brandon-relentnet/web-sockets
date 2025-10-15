@@ -1,7 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ConnectionState } from '@/components/ConnectionState'
-import { MyForm } from '@/components/MyForm'
-//import Ticker from '@/components/Ticker'
 import TickerLive from '@/components/TickerLive'
 
 export const Route = createFileRoute('/')({
@@ -10,10 +7,7 @@ export const Route = createFileRoute('/')({
 
 function App() {
   return (
-    <div className="App">
-      <ConnectionState />
-      <MyForm />
-      {/* <Ticker /> */}
+    <div className="bg-zinc-900 p-8 min-h-screen text-zinc-100">
       <TickerLive />
     </div>
   )
