@@ -1,73 +1,118 @@
 import { createFileRoute } from '@tanstack/react-router'
 
+type TeamData = {
+  name: string
+  players: [string, string]
+  logoUrl: string
+  score: number
+}
+
+type TickerData = {
+  associationName: string
+  eventName: string
+  eventPhase: string
+  eventFormat: string
+  team1: TeamData
+  team2: TeamData
+  matchStatus: string
+}
+
+// Dummy API-style data
+const dummyTickerData: TickerData = {
+  associationName: 'NCPA',
+  eventName: 'UTAH Regional',
+  eventPhase: 'Pool Play',
+  eventFormat: '1st to 11, win by 2',
+  team1: {
+    name: 'UTA Blue',
+    players: ['Alice Alvarez', 'Bobby Benson'],
+    logoUrl: '/logos/uta-blue.png',
+    score: 5,
+  },
+  team2: {
+    name: 'BYU White',
+    players: ['Casey Chang', 'Drew Daniels'],
+    logoUrl: '/logos/byu-white.png',
+    score: 7,
+  },
+  matchStatus: 'Team 2 leads 3-0',
+}
+
 export const Route = createFileRoute('/ticker')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
+  const data = dummyTickerData
+
   return (
     <div className="flex flex-1 items-center bg-[#00b140] min-h-screen">
       <div className="mx-auto w-full max-w-5xl">
         <div className="relative mx-auto px-4 max-w-[1200px]">
-          {/* Ticker shell:
-             - 3 cols: [left square | content | score col]
-             - pl-28 reserves space for the absolute logo overlap */}
           <div className="inline-grid relative grid-cols-[3.75rem_minmax(0,1fr)_3.75rem] pt-10 pl-28 align-top">
-            {/* Overlapping logo; keep width in sync with pl-28 */}
+            {/* Association logo */}
             <img
-              src="/NCPA-Logo.png"
-              alt="NCPA"
+              src={`/${data.associationName}-Logo.png`}
+              alt={data.associationName}
               className="-bottom-4 -left-15 z-10 absolute w-75 h-auto pointer-events-none select-none"
             />
 
-            {/* HEADER spans first two columns; no spacer element needed */}
+            {/* Header bar */}
             <div className="col-span-2 col-start-1 bg-[#001b3f] px-4 py-1 font-bold text-white text-sm text-end">
-              NCPA - UTAH Regional
+              {data.associationName} - {data.eventName}
             </div>
 
-            {/* BODY spans all three columns */}
+            {/* Match body */}
             <div className="grid grid-cols-[3.75rem_minmax(0,1fr)_3.75rem] col-span-3 col-start-1 w-full">
-              {/* Left vertical band to align under header’s left area */}
+              {/* Left band */}
               <div className="bg-white h-full aspect-square" />
 
-              {/* Names column (flexible). min-w-0 so truncate/wrap behaves */}
+              {/* Teams */}
               <div className="flex flex-col divide-y divide-[#001b3f] min-w-0">
                 {/* Team 1 */}
                 <div className="flex bg-white text-black">
-                  <div className="flex justify-center items-center bg-white ml-18 border-[#001b3f] border-r h-15 aspect-square text-[10px] shrink-0">
-                    t1_logo
+                  <div className="flex justify-center items-center bg-white ml-18 border-[#001b3f] border-r h-15 aspect-square shrink-0">
+                    <img
+                      src={data.team1.logoUrl}
+                      alt={`${data.team1.name} logo`}
+                      className="p-1 h-full object-contain"
+                    />
                   </div>
-                  <div className="flex flex-col flex-1 pr-6 pl-2 min-w-0">
-                    <span className="font-bold">t1_name</span>
+                  <div className="flex flex-col flex-1 justify-center pr-6 pl-2 min-w-0">
+                    <span className="font-bold">{data.team1.name}</span>
                     <span className="font-bold truncate">
-                      t1_player1 &amp; t1_player2
+                      {data.team1.players.join(' & ')}
                     </span>
                   </div>
-                  <div className="flex justify-center items-center bg-[#78bce3] border-[#001b3f] border-x h-15 aspect-square text-xs shrink-0">
-                    t1_score
+                  <div className="flex justify-center items-center bg-[#78bce3] border-[#001b3f] border-x h-15 aspect-square font-bold text-4xl shrink-0">
+                    {data.team1.score}
                   </div>
                 </div>
 
                 {/* Team 2 */}
                 <div className="flex bg-white text-black">
-                  <div className="flex justify-center items-center bg-white ml-18 border-[#001b3f] border-r h-15 aspect-square text-[10px] shrink-0">
-                    t2_logo
+                  <div className="flex justify-center items-center bg-white ml-18 border-[#001b3f] border-r h-15 aspect-square shrink-0">
+                    <img
+                      src={data.team2.logoUrl}
+                      alt={`${data.team2.name} logo`}
+                      className="p-1 h-full object-contain"
+                    />
                   </div>
-                  <div className="flex flex-col flex-1 pr-6 pl-2 min-w-0">
-                    <span className="font-bold">t2_name</span>
+                  <div className="flex flex-col flex-1 justify-center pr-6 pl-2 min-w-0">
+                    <span className="font-bold">{data.team2.name}</span>
                     <span className="font-bold truncate">
-                      t2_player1 &amp; t2_player2
+                      {data.team2.players.join(' & ')}
                     </span>
                   </div>
-                  <div className="flex justify-center items-center bg-[#78bce3] border-[#001b3f] border-x h-15 aspect-square text-xs shrink-0">
-                    t2_score
+                  <div className="flex justify-center items-center bg-[#78bce3] border-[#001b3f] border-x h-15 aspect-square font-bold text-4xl shrink-0">
+                    {data.team2.score}
                   </div>
                 </div>
               </div>
 
-              {/* FOOTER spans first two columns; no spacer element needed */}
+              {/* Footer bar */}
               <div className="col-span-2 col-start-1 bg-[#001b3f] px-4 py-1 font-bold text-white text-sm text-end">
-                Pool Play - 1st to 11 (win by 2) - t2 leads x-y
+                {data.eventPhase} - {data.eventFormat} - {data.matchStatus}
               </div>
             </div>
           </div>
