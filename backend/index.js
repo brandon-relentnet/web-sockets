@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import tickerRouter from "./routes/ticker.js";
+import tickerRouter from "./routes/ticker/index.js";
 
 const app = express();
 

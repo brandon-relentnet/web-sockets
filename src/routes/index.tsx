@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import FAB from '@/components/FAB'
 import MatchSelector from '@/components/MatchSelector'
 import TickerStream from '@/components/TickerStream'
+import TickerView from '@/components/TickerView'
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -15,7 +16,10 @@ function App() {
           <MatchSelector />
         </div>
       </div>
-      <div className="flex-1 bg-base-200 shadow-md card">
+      <div className="flex-1 bg-base-200 shadow-md py-5 pl-15 card">
+        <div className="mb-12 pl-20">
+          <TickerView />
+        </div>
         <TickerStream />
       </div>
       <FAB />
