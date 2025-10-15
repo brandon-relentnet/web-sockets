@@ -36,20 +36,18 @@ export default function TickerLive() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Only include this if you set ADMIN_TOKEN in the server:
-          // "x-admin-token": process.env.NEXT_PUBLIC_ADMIN_TOKEN ?? "",
         },
         body: JSON.stringify({ match_id: next }),
       })
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
-      setMatchId(next) // local UI state; SSE will broadcast the new snapshot to everyone
+      setMatchId(next)
     } catch (err: any) {
       setError(err.message || 'update failed')
     }
   }
 
   return (
-    <div className="flex flex-col gap-4 bg-zinc-800 p-4 rounded">
+    <div className="flex flex-col gap-4 p-4 box">
       <form onSubmit={handleSubmit} className="flex items-center gap-2">
         <input
           name="matchId"
