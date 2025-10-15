@@ -33,7 +33,7 @@ export async function fetchStaticContext(matchId) {
   const team2Players = toPair(t2.team_members);
 
   const associationName = "NCPA";
-  const eventName = [mi.tournament, mi.bracket_name].filter(Boolean).join(" — ") || defaultCtx.eventName;
+  const eventName = [mi.tournament] || defaultCtx.eventName;
   const eventPhase = String(mi.bracket_status || defaultCtx.eventPhase).replace(/\s+In Progress$/i, "").trim();
 
   const derived = { associationName, eventName, eventPhase, team1Name, team2Name, team1Logo, team2Logo, team1Players, team2Players };

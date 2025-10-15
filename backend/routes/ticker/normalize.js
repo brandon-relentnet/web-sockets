@@ -24,7 +24,7 @@ export function selectCurrentGameIndex(info){
 }
 
 const formatRules = (t,m)=>`First to ${Number.isFinite(t)?t:11}, win by ${Number.isFinite(m)?m:2}`;
-const seriesStatus=(t1,t2,w1,w2)=>{const a=Number.isFinite(w1)?w1:0,b=Number.isFinite(w2)?w2:0; if(a===b) return `Series tied ${a}–${b}`; return a>b?`Team 1 (${t1}) leads ${a}–${b}`:`Team 2 (${t2}) leads ${b}–${a}`;};
+const seriesStatus=(t1,t2,w1,w2)=>{const a=Number.isFinite(w1)?w1:0,b=Number.isFinite(w2)?w2:0; if(a===b) return `Series tied ${a}–${b}`; return a>b?`${t1} leads ${a}–${b}`:`${t2} leads ${b}–${a}`;};
 
 export function cleanFromNcpa(raw, ctxOverride = {}) {
   const ctxBase = ctxByMatch.get(currentMatchId) || defaultCtx;
